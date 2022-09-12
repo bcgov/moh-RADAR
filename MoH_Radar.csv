@@ -183,6 +183,3 @@ SunOne LDAP,Retire,"Languages, Frameworks, and Platforms",FALSE,<p>IAM is curren
 MS Biztalk,Retire,Execution Environments,FALSE,<p>Microsoft BizTalk Server is an inter-organizational middleware system that automates business processes through the use of adapters which are tailored to communicate with different software systems used in an enterprise.</p>,y
 Oracle JDK ,Retire,"Languages, Frameworks, and Platforms",TRUE,"<p>MoH direction is Migrate all Java dependencies from Oracle JDK to OpenJDK. Upgrade all older versions to at least JDK8, but preference is to move to a minumm of JDK 11.</P>",n
 Siebel,Retire,"Languages, Frameworks, and Platforms",TRUE,"<p>Siebel CRM Systems, Inc. was a software company principally engaged in the design, development, marketing, and support of customer relationship management applications</p>",y
-,,,,,n
-,,,,,y
-,,,,,n
