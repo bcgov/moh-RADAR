@@ -46,7 +46,7 @@ The Radar app can be run locally in Docker. Execute the following commands to pu
 
 ```
 $ docker pull wwwthoughtworks/build-your-own-radar
-$ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"development_test_and_release_tools\", \"languages_frameworks_and_platforms\", \"common_services\", \"execution_environments\"]" wwwthoughtworks/build-your-own-radar:latest
+$ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"Development/Testing/Release Tools\", \"Languages/Frameworks, Platforms\", \"Common Services\", \"Execution Environments\"]" wwwthoughtworks/build-your-own-radar:latest
 ```
 
 This will pull the image and run it with the rings Employ, Explore, Deprecate, and Retire, and quadrants development_test_and_release_tools, languages_frameworks_and_platforms, common_services, and execution_environments.
