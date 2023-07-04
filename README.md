@@ -49,7 +49,7 @@ $ docker pull wwwthoughtworks/build-your-own-radar
 $ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"Development/Testing/Release Tools\", \"Languages/Frameworks, Platforms\", \"Common Services\", \"Execution Environments\"]" wwwthoughtworks/build-your-own-radar:latest
 ```
 
-This will pull the image and run it with the rings Employ, Explore, Deprecate, and Retire, and quadrants development_test_and_release_tools, languages_frameworks_and_platforms, common_services, and execution_environments.
+This will pull the image and run it with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Development/Testing/Release Tools`, `Languages/Frameworks, Platforms`, `Common Services`, and `Execution Environments`.
 
 To access the running app visit http://localhost:8080. There you can enter the URL of a publicly available .csv file and the app will create your diagram.
 
