@@ -55,4 +55,6 @@ This will pull the image and run it with the rings `Employ`, `Explore`, `Depreca
 
 To access the running app visit http://localhost:8080. There you can enter the URL of a publicly available .csv file and the app will create your diagram.
 
+To build your own RADAR use the raw version of the CSV file (for example https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv)
+
 Visit https://github.com/thoughtworks/build-your-own-radar for more details.
