@@ -1,0 +1,4 @@
+name: Push to PowerBI Live Dataset
+
+on:
+  workflow_dispatch:
