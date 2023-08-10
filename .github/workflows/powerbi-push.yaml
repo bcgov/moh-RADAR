@@ -4,5 +4,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  steps:
-  - run: echo Hello World!
+  greet:
+    steps:
+      - run: echo Hello World!
