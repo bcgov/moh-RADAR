@@ -1,6 +1,8 @@
 # moh-RADAR
 
-Technology Radar by Thoughtworks is a tool for visualizing the technologies that a team or organization is using, plans to use, or plans to assess in the future.
+The Technology Radar by Thoughtworks serves as a valuable tool for visualizing the current and future technology landscape of a team or organization. When utilized in conjunction with the Configuration Management Database (CMDB), it enhances the understanding and management of the technologies employed.
+
+By integrating the Technology Radar with the CMDB, organizations can leverage the comprehensive view of technology assets and their relationships. The CMDB provides a structured repository of configuration items, including software applications, hardware components, and their dependencies. This information can be synchronized with the Technology Radar to enrich its data and provide a more holistic perspective on the technology ecosystem.
 
 The Radar diagram is divided into four quadrants and four rings.
 
@@ -52,5 +54,7 @@ $ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", 
 This will pull the image and run it with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Development/Testing/Release Tools`, `Languages/Frameworks, Platforms`, `Common Services`, and `Execution Environments`.
 
 To access the running app visit http://localhost:8080. There you can enter the URL of a publicly available .csv file and the app will create your diagram.
+
+To build your own RADAR use the raw version of the CSV file (for example https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv)
 
 Visit https://github.com/thoughtworks/build-your-own-radar for more details.
