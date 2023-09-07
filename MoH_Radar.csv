@@ -1,6 +1,6 @@
 name,ring,quadrant,isNew,description,MoH_Used
-Oracle Enterprise Manager,Employ,Common Services,FALSE,<p>Oracle Enterprise Manager (OEM) is a set of web-based tools aimed at managing software and hardware produced by Oracle Corporation as well as by some non-Oracle entities.</p>,y
-ServiceNow,Employ,Common Services,FALSE,<p>Service Now is a leading ITSM tool used by help desk and the Access Team</p>,n
+Oracle Enterprise Manager,Employ,Common,FALSE,<p>Oracle Enterprise Manager (OEM) is a set of web-based tools aimed at managing software and hardware produced by Oracle Corporation as well as by some non-Oracle entities.</p>,y
+ServiceNow,Employ,Common,FALSE,<p>Service Now is a leading ITSM tool used by help desk and the Access Team</p>,n
 Ansible,Employ,Development/Testing/Release Tools,TRUE,"<p>Ansible is an open-source software provisioning, configuration management, and application-deployment tool enabling infrastructure as code. IIT uses ansible to automate infrastructure and software installations.</P>",y
 Apache Tomcat,Employ,Development/Testing/Release Tools,FALSE,"<p>Apache TomcatÃ‚Â® is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies. Apache Tomcat is the middleware platform for all Oracle Fusion Middleware applications under transformation and all net new java based applications.</p>",n
 Apache HTTP Server,Employ,Execution Environments,FALSE,<p>The Apache HTTP Server is a free and open-source cross-platform web server software</p>,n
