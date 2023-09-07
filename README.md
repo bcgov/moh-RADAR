@@ -8,21 +8,21 @@ The Radar diagram is divided into four quadrants and four rings.
 
 ## Quadrants
 
-### 1. Development, Test and Release Tools
+### 1. Platform
 
-This quadrant contains technologies and apps that team members use in their work. These can range from software development kits to unit testing programs to CI/CD pipelines.
+Platform in this context refers to the foundational software, services, and tools needed to support and manage MoH applications and their underlying infrastructure. It includes operating systems, databases, container orchestration services, cloud resources, and other infrastructure components that provide a runtime environment for applications. The Platform category encompasses the software stack and infrastructure upon which applications are built, deployed, and run.
 
-### 2. Common Services
+### 2. Development Tools and Automation
 
-The Common Services quadrant contains the services that are used by many applications and serve a more general purpose. Examples of common services are email notification services, monitoring/metric systems and data security managers.
+Development Tools and Automation encompass a wide range of tools, frameworks, and practices used in software development and automation processes. This category includes tools for writing code, automating build and deployment pipelines, managing containers, and orchestrating development workflows. It focuses on enhancing the efficiency, collaboration, and automation of software development and deployment tasks.
 
-### 3. Execution Environments
+### 3. Management and Monitoring (Including Productivity Tools)
 
-Execution environments are generally large-scale technologies that apps are built on. An execution environment might provide a scaffold around which an application is assembled, such as Glassfish, or a generic service an application uses, such as an Oracle database.
+This category encompasses tools, processes, and practices for managing, monitoring, and maintaining IT infrastructure, applications, and services. It includes tools for configuration management, monitoring and logging solutions, incident management, and resources that ensure the reliability, security, and performance of IT environments. Additionally, this category includes productivity and collaboration tools that aid in managing and monitoring various aspects of IT operations and enhancing overall workflow efficiency. It provides visibility, control, productivity enhancements, and collaboration capabilities to efficiently manage and monitor IT resources and tasks.
 
-### 4. Languages, Frameworks and Platforms
+### 4. Language and Frameworks
 
-This quadrant describes the programming languages, related frameworks and hosting services that applications are built with. Examples Java and C#, Keycloak and other security platforms, and hosting services like OpenShift and AWS.
+Language and Frameworks refer to programming languages, software frameworks, and development environments used in software development. This category encompasses a variety of programming languages (e.g., Java, Python), frameworks (e.g., Spring Boot, React.js), and development tools that enable the creation and development of software solutions. It focuses on the tools and technologies that developers use to build and maintain applications.
 
 ## Rings
 
