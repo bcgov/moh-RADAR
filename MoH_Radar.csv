@@ -1,6 +1,6 @@
 name,ring,quadrant,isNew,description,MoH_Used
-Ansible,Employ,Development Tools,TRUE,<p>test</p>,y
-Ant,Retire,Development Tools,FALSE,<p>test</p>,y
+Ansible,Employ,Development,TRUE,<p>test</p>,y
+Ant,Retire,Development,FALSE,<p>test</p>,y
 Angular,Employ,Language,TRUE,<p>test</p>,y
 Bit.dev,Explore,Language,TRUE,<p>test</p>,y
 Vue.js,Employ,Language,FALSE,<p>test</p>,y
