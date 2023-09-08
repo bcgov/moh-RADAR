@@ -5,5 +5,5 @@ name,ring,quadrant,isNew,description,MoH_Used
 .NET 2,Explore,Platform,FALSE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
 .NET 3,Explore,Languages,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
 .NET 4,Explore,Platform,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
-Adam,Explore,Platform,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
+Adam,Explore,Languages/Frameworks, Platforms,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
 Tyler,Explore,Management and Monitoring,TRUE,<p>my test.</p>,y
