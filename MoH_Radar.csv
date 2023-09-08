@@ -1,9 +1,9 @@
 name,ring,quadrant,isNew,description,MoH_Used
-.NET 1,Explore,Languages and Frameworks,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
+.NET 1,Explore,Languages,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
 .NET 0,Explore,Platform,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",n
 .NET 1,Explore,Platform,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
 .NET 2,Explore,Platform,FALSE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
-.NET 3,Explore,Languages and Frameworks,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
+.NET 3,Explore,Languages,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
 .NET 4,Explore,Platform,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
 .NET 5,Explore,Platform,TRUE,"<p>.NET Core is a free and open-source, managed computer software framework for Windows, Linux, and macOS operating systems. It is a cross-platform successor to.NET Framework.</p>",y
-.Net Core,Explore,Languages and Frameworks,TRUE,<p>my test.</p>,y
+.Net Core,Explore,Languages,TRUE,<p>my test.</p>,y
