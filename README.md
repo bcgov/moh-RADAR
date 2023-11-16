@@ -4,7 +4,7 @@ The Technology Radar by Thoughtworks serves as a valuable tool for visualizing t
 
 By integrating the Technology Radar with the CMDB, organizations can leverage the comprehensive view of technology assets and their relationships. The CMDB provides a structured repository of configuration items, including software applications, hardware components, and their dependencies. This information can be synchronized with the Technology Radar to enrich its data and provide a more holistic perspective on the technology ecosystem.
 
-The Radar diagram is divided into four quadrants and four rings.
+The Radar diagram is divided into four quadrants and four rings. Visit [https://radar-moh.ynr9ed-dev.nimbus.cloud.gov.bc.ca/](https://radar-moh.ynr9ed-dev.nimbus.cloud.gov.bc.ca/) to see the MoH RADAR.
 
 ## Quadrants
 
@@ -20,7 +20,7 @@ Development Tools and Automation encompass a wide range of tools, frameworks, an
 
 This category encompasses tools, processes, and practices for managing, monitoring, and maintaining IT infrastructure, applications, and services. It includes tools for configuration management, monitoring and logging solutions, incident management, and resources that ensure the reliability, security, and performance of IT environments. Additionally, this category includes productivity and collaboration tools that aid in managing and monitoring various aspects of IT operations and enhancing overall workflow efficiency. It provides visibility, control, productivity enhancements, and collaboration capabilities to efficiently manage and monitor IT resources and tasks.
 
-### 4. Language and Frameworks
+### 4. Languages and Frameworks
 
 Language and Frameworks refer to programming languages, software frameworks, and development environments used in software development. This category encompasses a variety of programming languages (e.g., Java, Python), frameworks (e.g., Spring Boot, React.js), and development tools that enable the creation and development of software solutions. It focuses on the tools and technologies that developers use to build and maintain applications.
 
@@ -46,16 +46,13 @@ The innermost ring contains items that are currently in use by the organization 
 
 The Radar app can be run locally in Docker. Execute the following commands to pull the image from the [Thoughtworks DockerHub Repo](https://hub.docker.com/r/wwwthoughtworks/build-your-own-radar/).
 
-```
+```bash
 $ docker pull wwwthoughtworks/build-your-own-radar
-$ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"Development/Testing/Release Tools\", \"Languages/Frameworks, Platforms\", \"Common Services\", \"Execution Environments\"]" wwwthoughtworks/build-your-own-radar:latest
+$ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"Platform\", \"Development Tools and Automation\", \"Management and Monitoring\", \"Languages and Frameworks\"]" wwwthoughtworks/build-your-own-radar:latest
 ```
 
-This will pull the image and run it with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Development/Testing/Release Tools`, `Languages/Frameworks, Platforms`, `Common Services`, and `Execution Environments`.
+This will pull the image and run it with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Platform`, `Development Tools and Automation`, `Management and Monitoring`, and `Languages and Frameworks`.
 
-To access the running app visit http://localhost:8080. There you can enter the URL of a publicly available .csv file and the app will create your diagram.
+To access the running app, visit http://localhost:8080. To use custom data in your RADAR, enter the URL of a publicly available CSV file in the central field. For example, the MoH RADAR uses [https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv](https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv). Note that the RADAR can only process raw files.
 
-To build your own RADAR use the raw version of the CSV file (for example https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv)
-
-Visit https://github.com/thoughtworks/build-your-own-radar for more details.
-Visit https://radar-moh.ynr9ed-dev.nimbus.cloud.gov.bc.ca/ to see the production version of RADAR
+Visit [https://github.com/thoughtworks/build-your-own-radar](https://github.com/thoughtworks/build-your-own-radar) for more details about customizing the RADAR.
