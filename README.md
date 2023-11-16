@@ -58,3 +58,4 @@ To access the running app visit http://localhost:8080. There you can enter the U
 To build your own RADAR use the raw version of the CSV file (for example https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv)
 
 Visit https://github.com/thoughtworks/build-your-own-radar for more details.
+Visit https://radar-moh.ynr9ed-dev.nimbus.cloud.gov.bc.ca/ to see the production version of RADAR
