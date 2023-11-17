@@ -13,7 +13,7 @@
     &__ring-name {
       text-transform: none;
       margin: 0;
-      scroll-margin-top: $subnavHeight;
+      scroll-margin-top: calc($subnavHeight + $headerHeight);
     }
 
     @include media-query-xlarge {
@@ -71,7 +71,7 @@
           justify-content: space-between;
           align-items: center;
           cursor: pointer;
-          scroll-margin-top: $subnavHeight;
+          scroll-margin-top: calc($subnavHeight + $headerHeight);
 
           & > * {
             pointer-events: none;

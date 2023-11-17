@@ -1,8 +1,52 @@
 @import 'colors';
 @import 'layout';
 
+@font-face {
+  font-family: 'BCSans';
+  src: url(./images/BCSans-Regular.woff2) format('woff2'), url(./images/BCSans-Regular.woff) format('woff');
+}
+
 header {
-  text-align: center;
+  background-color: #036;
+  border-bottom: 2px solid #fcba19;
+  padding: 0 65px 0 65px;
+  color: #fff;
+  display: flex;
+  height: $headerHeight;
+  top: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 20;
+}
+
+header h1 {
+  font-family: 'BCSans', 'Noto Sans', Verdana, Arial, sans-serif !important;
+  font-weight: normal;
+  margin: 5px 5px 0 18px;
+}
+
+header .banner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 10px 0 0;
+}
+
+header .other {
+  display: flex;
+  flex-grow: 1;
+}
+
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  header h1 {
+    font-size: calc(7px + 2.2vw) !important;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  header h1 {
+    font-size: 2.0em !important;
+  }
 }
 
 .radar-title,
@@ -238,7 +282,7 @@ header {
         border-bottom: none;
 
         img {
-          height: 20px;
+          height: calc($headerHeight - 2 * $headerPadding);
           width: auto;
           margin-top: 1.5px;
         }

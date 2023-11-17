@@ -455,16 +455,16 @@ function quadrantScrollHandler(
     radarElement.classed('sticky', true)
     radarLegendsContainer.classed('sticky', true)
 
-    if (window.scrollY + uiConfig.subnavHeight + radarHeight >= quadrantTableOffset) {
+    if (window.scrollY + uiConfig.subnavHeight + uiConfig.headerHeight + radarHeight >= quadrantTableOffset) {
       radarElement.classed('sticky', false)
       radarLegendsContainer.classed('sticky', false)
 
-      radarElement.style('top', `${quadrantTableHeight - radarHeight - uiConfig.subnavHeight}px`)
+      radarElement.style('top', `${quadrantTableHeight - radarHeight - uiConfig.subnavHeight - uiConfig.headerHeight}px`)
       radarElement.style('left', prevLeft)
 
       radarLegendsContainer.style(
         'top',
-        `${quadrantTableHeight - radarHeight - uiConfig.subnavHeight + getScaledQuadrantHeightWithGap(scale)}px`,
+        `${quadrantTableHeight - radarHeight - uiConfig.subnavHeight - uiConfig.headerHeight + getScaledQuadrantHeightWithGap(scale)}px`,
       )
       radarLegendsContainer.style(
         'left',
@@ -489,7 +489,7 @@ function quadrantScrollHandler(
         )
       }
 
-      radarLegendsContainer.style('top', `${getScaledQuadrantHeightWithGap(scale) + uiConfig.subnavHeight}px`)
+      radarLegendsContainer.style('top', `${getScaledQuadrantHeightWithGap(scale) + uiConfig.subnavHeight + uiConfig.headerHeight}px`)
     }
   } else {
     radarElement.style('top', prevTop)
@@ -515,7 +515,7 @@ function stickQuadrantOnScroll() {
     const radarLegendsContainer = d3.select('.radar-legends')
 
     const radarHeight = quadrantHeight * scale + quadrantsGap * scale
-    const offset = radarContainer.node().offsetTop - uiConfig.subnavHeight
+    const offset = radarContainer.node().offsetTop - uiConfig.subnavHeight - uiConfig.headerHeight
     const radarWidth = radarContainer.node().getBoundingClientRect().width
     const selectedOrder = radarElement.attr('data-quadrant-selected')
 
@@ -540,7 +540,7 @@ function stickQuadrantOnScroll() {
     )
 
     if (
-      uiConfig.subnavHeight + radarHeight + quadrantsGap * 2 + uiConfig.legendsHeight <
+      uiConfig.subnavHeight + uiConfig.headerHeight + radarHeight + quadrantsGap * 2 + uiConfig.legendsHeight <
       getElementHeight(selectedQuadrantTable)
     ) {
       window.addEventListener('scroll', quadrantScrollHandlerReference)

@@ -5,7 +5,7 @@
 .helper-description {
   @include eight-column-layout-margin;
   padding-top: 32px;
-  margin-top: 24px;
+  margin-top: calc($headerHeight + 24px);
 
   p {
     font-weight: bold;

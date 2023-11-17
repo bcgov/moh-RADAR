@@ -85,7 +85,7 @@
         &.sticky {
           position: fixed;
           transition: none;
-          top: $subnavHeight !important;
+          top: calc($subnavHeight + $headerHeight) !important;
         }
       }
     }

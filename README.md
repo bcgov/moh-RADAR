@@ -4,7 +4,7 @@ The Technology Radar by Thoughtworks serves as a valuable tool for visualizing t
 
 By integrating the Technology Radar with the CMDB, organizations can leverage the comprehensive view of technology assets and their relationships. The CMDB provides a structured repository of configuration items, including software applications, hardware components, and their dependencies. This information can be synchronized with the Technology Radar to enrich its data and provide a more holistic perspective on the technology ecosystem.
 
-The Radar diagram is divided into four quadrants and four rings. Visit [https://radar-moh.ynr9ed-dev.nimbus.cloud.gov.bc.ca/](https://radar-moh.ynr9ed-dev.nimbus.cloud.gov.bc.ca/) to see the MoH RADAR.
+The Radar diagram is divided into four quadrants and four rings. Visit https://radar.ynr9ed-dev.nimbus.cloud.gov.bc.ca to see the MoH RADAR.
 
 ## Quadrants
 
@@ -53,6 +53,6 @@ $ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", 
 
 This will pull the image and run it with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Platform`, `Development Tools and Automation`, `Management and Monitoring`, and `Languages and Frameworks`.
 
-To access the running app, visit http://localhost:8080. To use custom data in your RADAR, enter the URL of a publicly available CSV file in the central field. For example, the MoH RADAR uses [https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv](https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv). Note that the RADAR can only process raw files.
+To access the running app, visit http://localhost:8080. To use custom data in your RADAR, enter the URL of a publicly available CSV file in the central field. For example, the MoH RADAR uses https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv. Note that the RADAR can only process raw files.
 
-Visit [https://github.com/thoughtworks/build-your-own-radar](https://github.com/thoughtworks/build-your-own-radar) for more details about customizing the RADAR.
+Visit https://github.com/thoughtworks/build-your-own-radar for more details about customizing the RADAR.
