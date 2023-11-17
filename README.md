@@ -42,17 +42,14 @@ Items in this ring are normally in use under supervision. People interact with t
 
 The innermost ring contains items that are currently in use by the organization and its teams. These items have passed the trial stage and are applied in core stages of the workflow, including in products and organization-scale management practices.
 
-## Running the Radar App Locally
+## Deploying the App
 
-The Radar app can be run locally in Docker. Execute the following commands to pull the image from the [Thoughtworks DockerHub Repo](https://hub.docker.com/r/wwwthoughtworks/build-your-own-radar/).
+The Ministry of Health RADAR is deployed in an AWS EC2 instance. This repo contains a copy of the Build Your Own Radar project under [/radar](/radar), with some customizations to make the app match other BC Government Health apps, that the deployment is built from. To build the Docker image for the RADAR, run `docker build -t radar ./radar`.
+
+To run the container locally in Docker, use the below command. This will run the image with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Platform`, `Development Tools and Automation`, `Management and Monitoring`, and `Languages and Frameworks`. These are the rings and quadrants expected by the CSV data file. To access the running app, visit http://localhost:8080. To use custom data in your RADAR, enter the URL of a publicly available CSV file in the central field. For example, the MoH RADAR uses https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv. Note that the RADAR can only process raw files that are publicly visible.
 
 ```bash
-$ docker pull wwwthoughtworks/build-your-own-radar
-$ docker run --rm -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"Platform\", \"Development Tools and Automation\", \"Management and Monitoring\", \"Languages and Frameworks\"]" wwwthoughtworks/build-your-own-radar:latest
+$ docker run -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"Platform\", \"Development Tools and Automation\", \"Management and Monitoring\", \"Languages and Frameworks\"]" radar
 ```
 
-This will pull the image and run it with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Platform`, `Development Tools and Automation`, `Management and Monitoring`, and `Languages and Frameworks`.
-
-To access the running app, visit http://localhost:8080. To use custom data in your RADAR, enter the URL of a publicly available CSV file in the central field. For example, the MoH RADAR uses https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv. Note that the RADAR can only process raw files.
-
-Visit https://github.com/thoughtworks/build-your-own-radar for more details about customizing the RADAR.
+To deploy the RADAR to the AWS EC2 instance, log in to the `ynr9ed-dev` console and find the ECR repository. Use the suggested login and push commands on that page with the credentials from the account's login portal to push the image to the repository. Finally, to make sure the app picks up the change, delete the current running task in the EC2 service and force a new deployment.
