@@ -1,5 +1,7 @@
 # moh-RADAR
 
+[![Lifecycle:Maturing](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+
 The Technology Radar by Thoughtworks serves as a valuable tool for visualizing the current and future technology landscape of a team or organization. When utilized in conjunction with the Configuration Management Database (CMDB), it enhances the understanding and management of the technologies employed.
 
 By integrating the Technology Radar with the CMDB, organizations can leverage the comprehensive view of technology assets and their relationships. The CMDB provides a structured repository of configuration items, including software applications, hardware components, and their dependencies. This information can be synchronized with the Technology Radar to enrich its data and provide a more holistic perspective on the technology ecosystem.
