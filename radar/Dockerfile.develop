@@ -1,0 +1,49 @@
+# Local development image.
+#
+# Differences from Dockerfile:
+#   - Newer nginx base image (Debian 12) because nginx:1.23.0 (Debian 11) can no longer be apt-upgraded.
+#   - Trusts the corporate root CA(s) so HTTPS works behind a TLS-intercepting proxy.
+#
+# The certificates are supplied through a named build context, so they never
+# live in the image build context or in git. From the repo root:
+#
+#   docker build -f radar/Dockerfile.develop \
+#     --build-context certs=<directory containing *.crt files> \
+#     -t radar-develop ./radar
+#
+# (BuildKit does not follow symlinks that point outside the context, so pass a
+# directory of real files, e.g. ~/Certificates, not ./certificates.)
+FROM nginx:1.28-bookworm
+
+# Trust the corporate root CA(s) before anything else touches the network
+COPY --from=certs *.crt /usr/local/share/ca-certificates/
+RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+# Node does not use the system store, so point it (and npm) at the extra CAs
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+RUN apt-get update && apt-get upgrade -y
+
+# Download the setup script first so a failed download fails the build
+RUN curl -fsSL -o /tmp/nodesource_setup.sh https://deb.nodesource.com/setup_20.x \
+  && bash /tmp/nodesource_setup.sh \
+  && rm /tmp/nodesource_setup.sh
+RUN apt-get install -y nodejs && node --version && npm --version
+
+RUN                                                                       \
+  apt-get install -y                                                      \
+  libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3                 \
+  libxss1 libasound2 libxtst6 xauth xvfb g++ make
+
+WORKDIR /src/build-your-own-radar
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci
+
+COPY . ./
+# The script is committed without the executable bit (builds on Windows hide this)
+RUN chmod +x ./build_and_start_nginx.sh
+
+# Override parent node image's entrypoint script (/usr/local/bin/docker-entrypoint.sh),
+# which tries to run CMD as a node command
+ENTRYPOINT []
+CMD ["./build_and_start_nginx.sh"]
