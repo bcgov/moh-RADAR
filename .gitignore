@@ -1,0 +1,3 @@
+# Local certificates (e.g. corporate proxy CA) - never commit
+certificates/*
+!certificates/.gitkeep
