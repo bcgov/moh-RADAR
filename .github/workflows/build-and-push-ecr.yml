@@ -1,22 +1,13 @@
 name: Build and deploy image
 
-# Branch -> environment mapping:
-#   dev  -> dev   (automatic on push)
-#   test -> test  (manual: Actions > Run workflow > pick branch "test")
-#   main -> prod  (manual: Actions > Run workflow > pick branch "main")
+# Deploys are manual and only from main: Actions > Run workflow > pick branch "main".
 #
-# Each environment (Settings > Environments) holds its own AWS account config:
+# Configure these in Settings > Secrets and variables > Actions (repository scope):
 #   secret   AWS_ROLE_ARN
 #   vars     AWS_REGION, ECR_REPOSITORY
 #   vars     ECS_CLUSTER, ECS_SERVICE (optional; if unset, the deploy step is skipped)
-# Add required reviewers to the "test" and "prod" environments for approval gates.
 
 on:
-  push:
-    branches: [dev]
-    paths:
-      - "radar/**"
-      - ".github/workflows/build-and-push-ecr.yml"
   workflow_dispatch:
 
 permissions:
@@ -29,10 +20,9 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    # Only the three mapped branches may run; anything else is skipped.
-    if: contains(fromJSON('["dev","test","main"]'), github.ref_name)
+    # Only main may deploy; anything else is skipped.
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name == 'main' && 'prod' || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
