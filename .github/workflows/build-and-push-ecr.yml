@@ -1,8 +1,19 @@
-name: Build and push image to ECR
+name: Build and deploy image
+
+# Branch -> environment mapping:
+#   dev  -> dev   (automatic on push)
+#   test -> test  (manual: Actions > Run workflow > pick branch "test")
+#   main -> prod  (manual: Actions > Run workflow > pick branch "main")
+#
+# Each environment (Settings > Environments) holds its own AWS account config:
+#   secret   AWS_ROLE_ARN
+#   vars     AWS_REGION, ECR_REPOSITORY
+#   vars     ECS_CLUSTER, ECS_SERVICE (optional; if unset, the deploy step is skipped)
+# Add required reviewers to the "test" and "prod" environments for approval gates.
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
     paths:
       - "radar/**"
       - ".github/workflows/build-and-push-ecr.yml"
@@ -13,12 +24,15 @@ permissions:
   contents: read
 
 concurrency:
-  group: ecr-push
+  group: deploy-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
-  build-and-push:
+  build-and-deploy:
+    # Only the three mapped branches may run; anything else is skipped.
+    if: contains(fromJSON('["dev","test","main"]'), github.ref_name)
     runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'prod' || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,5 +59,13 @@ jobs:
           tags: |
             ${{ steps.ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
             ${{ steps.ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ github.ref_name }}
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}
+
+      - name: Redeploy ECS service
+        if: ${{ vars.ECS_CLUSTER != '' && vars.ECS_SERVICE != '' }}
+        run: |
+          aws ecs update-service \
+            --cluster "${{ vars.ECS_CLUSTER }}" \
+            --service "${{ vars.ECS_SERVICE }}" \
+            --force-new-deployment
