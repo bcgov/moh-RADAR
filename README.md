@@ -68,4 +68,12 @@ $ docker build -f radar/Dockerfile.develop --build-context certs=$HOME/Certifica
 
 Every `.crt` file in that directory is added to the image's trust store. The production `radar/Dockerfile` does not include any certificates.
 
+### Deployment
+
+There is a single environment (`ynr9ed-dev`), and it is deployed from the `main` branch only. The `dev` branch is for integration and is not deployed automatically.
+
+To deploy, merge your changes into `main`, then go to **Actions > Build and deploy image > Run workflow** on GitHub and select the `main` branch. The workflow builds the image from `radar/Dockerfile`, pushes it to ECR, and, if `ECS_CLUSTER` and `ECS_SERVICE` are set, forces a new ECS deployment. The workflow reads its configuration from repository-level settings (Settings > Secrets and variables > Actions): secret `AWS_ROLE_ARN`, and variables `AWS_REGION`, `ECR_REPOSITORY`, `ECS_CLUSTER` and `ECS_SERVICE`. There are no per-environment settings.
+
+#### Manual deployment
+
 To deploy the RADAR to the AWS EC2 instance, log in to the `ynr9ed-dev` console and find the ECR repository. Use the suggested login and push commands on that page with the credentials from the account's login portal to push the image to the repository. Finally, to make sure the app picks up the change, delete the current running task in the EC2 service and force a new deployment. Note: if you are using a Windows machine, this process can be difficult. The copy-pasteable commands in the BC Gov AWS Login portal are formatted for a shell terminal rather than a Windows command prompt, but the AWS commands don't always work in a WSL terminal. To get around this, you can carefully copy the environment variables' names and values (without the double quotes) and set them with a `set` command in a Windows command prompt before running your AWS and Docker commands in the same terminal.

@@ -24,7 +24,7 @@ ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 RUN apt-get update && apt-get upgrade -y
 
 # Download the setup script first so a failed download fails the build
-RUN curl -fsSL -o /tmp/nodesource_setup.sh https://deb.nodesource.com/setup_20.x \
+RUN curl -fsSL -o /tmp/nodesource_setup.sh https://deb.nodesource.com/setup_24.x \
   && bash /tmp/nodesource_setup.sh \
   && rm /tmp/nodesource_setup.sh
 RUN apt-get install -y nodejs && node --version && npm --version
