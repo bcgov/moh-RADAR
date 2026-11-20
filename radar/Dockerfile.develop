@@ -1,49 +1,47 @@
-# Local development image.
-#
-# Differences from Dockerfile:
-#   - Newer nginx base image (Debian 12) because nginx:1.23.0 (Debian 11) can no longer be apt-upgraded.
-#   - Trusts the corporate root CA(s) so HTTPS works behind a TLS-intercepting proxy.
-#
-# The certificates are supplied through a named build context, so they never
-# live in the image build context or in git. From the repo root:
-#
-#   docker build -f radar/Dockerfile.develop \
-#     --build-context certs=<directory containing *.crt files> \
-#     -t radar-develop ./radar
-#
+# Local development image: same as Dockerfile, plus corporate CA trust for the build stage.
+# ---- Build stage: compile the static site with webpack ----
+FROM node:24-bookworm AS build
+
+# Trust the corporate root CA(s) so HTTPS works behind a TLS-intercepting proxy.
+# Supplied via a named build context so they never live in git:
+#   docker build -f radar/Dockerfile.develop --build-context certs=<dir with *.crt> -t radar-develop ./radar
 # (BuildKit does not follow symlinks that point outside the context, so pass a
 # directory of real files, e.g. ~/Certificates, not ./certificates.)
-FROM nginx:1.28-bookworm
-
-# Trust the corporate root CA(s) before anything else touches the network
 COPY --from=certs *.crt /usr/local/share/ca-certificates/
-RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+RUN update-ca-certificates
 # Node does not use the system store, so point it (and npm) at the extra CAs
 ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
-RUN apt-get update && apt-get upgrade -y
+# RINGS and QUADRANTS are compiled into the bundle by webpack, so they are
+# build-time settings. Override with --build-arg if needed.
+ARG RINGS='["Employ", "Explore", "Deprecate", "Retire"]'
+ARG QUADRANTS='["Platform", "Development Tools and Automation", "Management and Monitoring", "Languages and Frameworks"]'
+ENV RINGS=${RINGS} QUADRANTS=${QUADRANTS}
 
-# Download the setup script first so a failed download fails the build
-RUN curl -fsSL -o /tmp/nodesource_setup.sh https://deb.nodesource.com/setup_24.x \
-  && bash /tmp/nodesource_setup.sh \
-  && rm /tmp/nodesource_setup.sh
-RUN apt-get install -y nodejs && node --version && npm --version
-
-RUN                                                                       \
-  apt-get install -y                                                      \
-  libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3                 \
-  libxss1 libasound2 libxtst6 xauth xvfb g++ make
+# Cypress is only used for tests; skip downloading its binary
+ENV CYPRESS_INSTALL_BINARY=0
 
 WORKDIR /src/build-your-own-radar
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . ./
-# The script is committed without the executable bit (builds on Windows hide this)
-RUN chmod +x ./build_and_start_nginx.sh
+RUN npm run build:prod
 
-# Override parent node image's entrypoint script (/usr/local/bin/docker-entrypoint.sh),
-# which tries to run CMD as a node command
+# ---- Runtime stage: nginx serving static files, no Node.js ----
+FROM nginx:stable
+
+COPY default.template /etc/nginx/conf.d/default.conf
+COPY --from=build /src/build-your-own-radar/dist/ /opt/build-your-own-radar/
+COPY --from=build /src/build-your-own-radar/spec/end_to_end_tests/resources/localfiles/ /opt/build-your-own-radar/files/
+
+# nginx must write its cache and pid file as a non-root user
+RUN chown -R nginx:nginx /var/cache/nginx \
+  && sed -i 's#/run/nginx.pid#/tmp/nginx.pid#' /etc/nginx/nginx.conf
+
+USER nginx
+EXPOSE 80
+
+# Override parent image's entrypoint script, which rewrites config as root
 ENTRYPOINT []
-CMD ["./build_and_start_nginx.sh"]
+CMD ["nginx", "-g", "daemon off;"]
