@@ -48,10 +48,21 @@ The innermost ring contains items that are currently in use by the organization 
 
 The Ministry of Health RADAR is deployed in an AWS EC2 instance. This repo contains a copy of the Build Your Own Radar project under [/radar](/radar), with some customizations to make the app match other BC Government Health apps, that the deployment is built from. To build the Docker image for the RADAR, run `docker build -t radar ./radar`.
 
-To run the container locally in Docker, use the below command. This will run the image with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Platform`, `Development Tools and Automation`, `Management and Monitoring`, and `Languages and Frameworks`. These are the rings and quadrants expected by the CSV data file. To access the running app, visit http://localhost:8080. To use custom data in your RADAR, enter the URL of a publicly available CSV file in the central field. For example, the MoH RADAR uses https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv. Note that the RADAR can only process raw files that are publicly visible.
+The image is built in two stages: a Node.js stage compiles the app with webpack, and the final image is just nginx serving the static files (it runs as the non-root `nginx` user and has no Node.js).
+
+The rings and quadrants are compiled into the app at **build time**, not read when the container starts. By default the image is built with the rings `Employ`, `Explore`, `Deprecate`, and `Retire`, and quadrants `Platform`, `Development Tools and Automation`, `Management and Monitoring`, and `Languages and Frameworks`. These are the rings and quadrants expected by the CSV data file. To use different ones, pass them as build arguments (setting them with `docker run -e` has no effect):
 
 ```bash
-$ docker run -p 8080:80 -e RINGS="[\"Employ\", \"Explore\", \"Deprecate\", \"Retire\"]" -e QUADRANTS="[\"Platform\", \"Development Tools and Automation\", \"Management and Monitoring\", \"Languages and Frameworks\"]" radar
+$ docker build -t radar \
+    --build-arg RINGS='["Adopt", "Trial", "Assess", "Hold"]' \
+    --build-arg QUADRANTS='["Techniques", "Platforms", "Tools", "Languages & Frameworks"]' \
+    ./radar
+```
+
+To run the container locally in Docker, use the command below, then visit http://localhost:8080. To use custom data in your RADAR, enter the URL of a publicly available CSV file in the central field. For example, the MoH RADAR uses https://raw.githubusercontent.com/bcgov/moh-RADAR/main/MoH_Radar.csv. Note that the RADAR can only process raw files that are publicly visible.
+
+```bash
+$ docker run -p 8080:80 radar
 ```
 
 ### Building behind a TLS-intercepting proxy
